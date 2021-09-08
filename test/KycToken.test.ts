@@ -63,6 +63,13 @@ describe('KYC-Token', function () {
     expect((await kyct.kyced(wallets[1].address)).toString()).to.equal('true')
   })
 
+  it('allows owner to un KYC address2', async function () {
+    await kyct.setKyc(wallets[2].address, true)
+    expect((await kyct.kyced(wallets[2].address)).toString()).to.equal('true')
+    await kyct.setKyc(wallets[2].address, false)
+    expect((await kyct.kyced(wallets[2].address)).toString()).to.equal('false')
+  })
+
   describe('minting, transfer and burning', function () {
     beforeEach(async function () {
       await kyct.mint(wallets[1].address, '10000000000000000000')

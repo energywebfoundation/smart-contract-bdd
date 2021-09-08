@@ -4,7 +4,7 @@ let common = [
   '--format json:./reports/cucumber-json-reports/report.json',
   '--format rerun:@rerun.txt',
   '--format usage:usage.txt',
-  '--parallel 20',
+  '--parallel 5',
   '--require ./build/features/step_definitions/**/*.js',
   '--require ./build/features/step_definitions/*.js',
   '--require ./build/features/support/*.js'

@@ -1,4 +1,4 @@
-import { setWorldConstructor } from '@cucumber/cucumber'
+import { setWorldConstructor, setDefaultTimeout } from '@cucumber/cucumber'
 import {deployContract, MockProvider, solidity} from 'ethereum-waffle';
 import {use} from "chai";
 import KycTokenContract from "../../artifacts/contracts/kyc-token.sol/KycToken.json";
@@ -6,6 +6,8 @@ import {KycToken} from "../../src/types"
 import {Wallet} from "ethers";
 
 use(solidity);
+
+setDefaultTimeout(20 * 1000);
 
 class KycTokenWorld {
   public owner: string
