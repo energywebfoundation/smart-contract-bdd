@@ -6,7 +6,9 @@
   "scripts": {
     "test": "hardhat test",
     "compile": "hardhat compile",
-    "cuke": "hardhat compile && tsc && cucumber-js"
+    "cuke": "hardhat compile && tsc && cucumber-js",
+    "deploy:volta": "hardhat run --network volta scripts/deploy.js",
+    "deploy:ewc": "hardhat run --network ewc scripts/deploy.js"
   },
   "author": "Micha Roon",
   "license": "MIT",

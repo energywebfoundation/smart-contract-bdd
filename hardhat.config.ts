@@ -1,6 +1,11 @@
-import '@typechain/hardhat'
-import '@nomiclabs/hardhat-ethers'
-import '@nomiclabs/hardhat-waffle'
+import '@typechain/hardhat';
+import '@nomiclabs/hardhat-ethers';
+import '@nomiclabs/hardhat-waffle';
+
+// THIS PRIVATE KEY SHOULD ONLY BE USED IN TEST ENVIRONMENTS
+// It has been leaked publicly and its funds can be stolen at any time
+// Replace with your own private key
+const deployKey = "0xd9066ff9f753a1898709b568119055660a77d9aae4d7a4ad677b8fb3d2a571e5";
 
 // noinspection JSValidateJSDoc
 /**
@@ -8,6 +13,18 @@ import '@nomiclabs/hardhat-waffle'
  */
 module.exports = {
   solidity: "0.8.4",
+  networks: {
+    volta: {
+      url: "https://volta-rpc.energyweb.org",
+      accounts: [deployKey],
+      chainId: 73799
+    },
+    ewc: {
+      url: "https://rpc.energyweb.org",
+      accounts: [deployKey],
+      chainId: 246
+    }
+  },
   typechain: {
     outDir: 'src/types',
     target: 'ethers-v5',
