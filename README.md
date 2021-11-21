@@ -9,13 +9,20 @@ This is a demo repository of how to test smart contracts with Cucumber JS and Ha
 
 In order to build after a successful `clone`:
 
-* npm install
-* npm run compile
+* `npm install`
+* `npm run compile`
 
 After all the code has been generated you can check if it actually works:
 
-* npm run test
-* npm run cuke
+* `npm run test`
+* `npm run cuke`
+
+## Deploying
+
+- Volta (testnet)
+    - `npm run deploy:volta`
+- Energy Web Chain (EWC)
+    - `npm run deploy:ewc`
 
 ## Project structure
 

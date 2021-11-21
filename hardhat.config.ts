@@ -1,6 +1,14 @@
-import '@typechain/hardhat'
-import '@nomiclabs/hardhat-ethers'
-import '@nomiclabs/hardhat-waffle'
+import '@typechain/hardhat';
+import '@nomiclabs/hardhat-ethers';
+import '@nomiclabs/hardhat-waffle';
+
+import dotenv from 'dotenv';
+
+dotenv.config({
+  path: __dirname + '/.env'
+});
+
+const deployKey = process.env.DEPLOY_KEY;
 
 // noinspection JSValidateJSDoc
 /**
@@ -8,6 +16,18 @@ import '@nomiclabs/hardhat-waffle'
  */
 module.exports = {
   solidity: "0.8.4",
+  networks: {
+    volta: {
+      url: "https://volta-rpc.energyweb.org",
+      accounts: [deployKey],
+      chainId: 73799
+    },
+    ewc: {
+      url: "https://rpc.energyweb.org",
+      accounts: [deployKey],
+      chainId: 246
+    }
+  },
   typechain: {
     outDir: 'src/types',
     target: 'ethers-v5',
