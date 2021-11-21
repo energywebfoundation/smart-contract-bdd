@@ -2,10 +2,13 @@ import '@typechain/hardhat';
 import '@nomiclabs/hardhat-ethers';
 import '@nomiclabs/hardhat-waffle';
 
-// THIS PRIVATE KEY SHOULD ONLY BE USED IN TEST ENVIRONMENTS
-// It has been leaked publicly and its funds can be stolen at any time
-// Replace with your own private key
-const deployKey = "0xd9066ff9f753a1898709b568119055660a77d9aae4d7a4ad677b8fb3d2a571e5";
+import dotenv from 'dotenv';
+
+dotenv.config({
+  path: __dirname + '/.env'
+});
+
+const deployKey = process.env.DEPLOY_KEY;
 
 // noinspection JSValidateJSDoc
 /**
