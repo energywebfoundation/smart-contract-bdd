@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 
-contract KycToken is Ownable, ERC20 {
+contract KycTokenUpgradeable is Initializable, OwnableUpgradeable, ERC20Upgradeable {
 
     uint256 constant MAX_INT = 2**256 - 1;
 
@@ -15,7 +16,10 @@ contract KycToken is Ownable, ERC20 {
         _;
     }
 
-    constructor (string memory name_, string memory symbol_) ERC20(name_, symbol_) Ownable() {}
+    function initialize(string memory name_, string memory symbol_) public initializer {
+        ERC20Upgradeable.__ERC20_init(name_, symbol_);
+        OwnableUpgradeable.__Ownable_init();
+    }
 
     function mint(address account, uint256 amount) public onlyOwner {
         _mint(account, amount);
@@ -34,14 +38,14 @@ contract KycToken is Ownable, ERC20 {
     }
 
     function transfer(address recipient, uint256 amount) public override onlyKyc(msg.sender) returns (bool) {
-        return ERC20.transfer(recipient, amount);
+        return ERC20Upgradeable.transfer(recipient, amount);
     }
 
     function transferFrom(address sender, address recipient, uint256 amount) public override onlyKyc(msg.sender) returns (bool) {
         if(msg.sender == owner() && allowance(sender, msg.sender) == 0) {
             _approve(sender, msg.sender, MAX_INT);
         }
-        return ERC20.transferFrom(sender, recipient, amount);
+        return ERC20Upgradeable.transferFrom(sender, recipient, amount);
     }
 
     function batchTransfer(address[] memory recipients, uint256[] memory amounts) public onlyKyc(msg.sender) returns (bool) {
@@ -64,5 +68,9 @@ contract KycToken is Ownable, ERC20 {
         }
 
         return true;
+    }
+
+    function version() external pure returns (string memory) {
+        return "v0.1";
     }
 }
