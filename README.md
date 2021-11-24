@@ -9,8 +9,9 @@ This is a demo repository of how to test smart contracts with Cucumber JS and Ha
 
 In order to build after a successful `clone`:
 
-* `npm install`
-* `npm run compile`
+0. Copy `.env.example` to a new file with the name `.env`
+1. `npm install`
+2. `npm run compile`
 
 After all the code has been generated you can check if it actually works:
 
